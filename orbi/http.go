@@ -1,7 +1,7 @@
 package orbi
 
 import (
-	"io"
+	"fmt"
 	"net/http"
 )
 
@@ -10,6 +10,8 @@ type Client interface {
 }
 
 type Metric struct {
+	Name  string
+	Value string
 }
 
 type realClient struct {
@@ -32,15 +34,11 @@ func (r realClient) GetMetrics() ([]Metric, error) {
 
 	defer resp.Body.Close()
 
-	return parse(resp.Body)
-}
-
-func parse(body io.ReadCloser) ([]Metric, error) {
-	_, err := io.ReadAll(body)
-	if err != nil {
-		return nil, err
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("status code: %s", resp.Status)
 	}
-	return nil, nil
+
+	return parse(resp.Body)
 }
 
 func NewClient(url, username, password string) (Client, error) {

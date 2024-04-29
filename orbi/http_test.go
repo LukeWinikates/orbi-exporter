@@ -13,18 +13,19 @@ func fakeOrbiServer(user, pwd string) http.Handler {
 		expectedUser, expectedPwd, ok := r.BasicAuth()
 
 		if !ok || expectedUser != user || expectedPwd != pwd {
-			w.Write([]byte("Wrong username/password"))
 			w.WriteHeader(500)
+			w.Write([]byte("Wrong username/password"))
 			return
 		}
-		if r.URL.Path == "RST_statistic.htm" {
-			file, err := os.ReadFile("testdata/RST_statistic.htm")
+
+		if r.URL.Path == "/RST_statistic.htm" {
+			file, err := os.ReadFile("./testdata/RST_statistic.htm")
 			if err != nil {
-				w.Write([]byte("couldn't find fixture file"))
 				w.WriteHeader(500)
+				w.Write([]byte("couldn't find fixture file"))
 			}
-			w.Write(file)
 			w.WriteHeader(200)
+			w.Write(file)
 			return
 		}
 
@@ -40,10 +41,12 @@ func TestHTTP(t *testing.T) {
 
 	client, err := NewClient(
 		testServer.URL, username, password)
+
 	assert.NoError(t, err)
 
 	metrics, err := client.GetMetrics()
 	assert.NoError(t, err)
 
 	assert.NotEmpty(t, metrics)
+	assert.Len(t, metrics, len(allowList))
 }

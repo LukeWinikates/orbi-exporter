@@ -12,3 +12,6 @@ this is built to run via the container service on my synology
 
 Basic Auth username/password
 
+## Compatibility
+
+Tested against an Orbi `RBR20`. Router Firmware Version `V2.7.4.24`
