@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<meta http-equiv="x-ua-compatible" content="IE=EDGE"><html><head><link rel="stylesheet" href="/style/form.css">
+    <script language=javascript type=text/javascript src=/funcs.js></script>
+    <title>Show Statistics</title><meta http-equiv=content-type content='text/html; charset=UTF-8'>
+    <meta content="MSHTML 6.00.2800.1141" name="GENERATOR"></head>
+
+<body bgcolor=#ffffff>
+<form method="POST" action="/apply.cgi?/RST_statistic.htm timestamp=91951181062">
+    <input type=hidden name=submit_flag value="show_statistic">
+
+
+    <script>
+      var sys_uptime="3069182";
+      var lan_status="Link up";
+      var lan_txpkts="88670935";
+      var lan_rxpkts="43826450";
+      var lan_collisions="0";
+      var lan_txbs="1345";
+      var lan_rxbs="729";
+      var lan_systime="3069182";
+      var wan_status="1000M/Full";
+      var wan_txpkts="121869567";
+      var wan_rxpkts="262693070";
+      var wan_collisions="0";
+      var wan_txbs="1399";
+      var wan_rxbs="1399";
+      var wan_systime="2695";
+      var bgn_status="400M";
+      var bgn_txpkts="31060602";
+      var bgn_rxpkts="60138";
+      var bgn_collisions="0";
+      var bgn_txbs="32";
+      var bgn_rxbs="6";
+      var bgn_systime="3069110";
+      var an_status="866M";
+      var an_txpkts="17510305";
+      var an_rxpkts="0";
+      var an_collisions="0";
+      var an_txbs="0";
+      var an_rxbs="0";
+      var an_systime="3069093";
+      var bh_status="866M";
+      var bh_txpkts="32365100";
+      var bh_rxpkts="4094";
+      var bh_collisions="0";
+      var bh_txbs="0";
+      var bh_rxbs="0";
+      var bh_systime="3069093";
+      var wwan0_status="no service";
+      var wwan0_txpkts="0";
+      var wwan0_rxpkts="0";
+      var wwan0_collisions="0";
+      var wwan0_txbs="0";
+      var wwan0_rxbs="0";
+      var wwan0_systime="0";
+      var lan_status0="1000M/Full"
+      var lan0_systime = "3069133"
+      var lan_status1="Link down"
+      var lan1_systime = "0"
+      var lan_status2="Link down"
+      var lan2_systime = "0"
+      var lan_status3="Link down"
+      var lan3_systime = "0"
+
+      var timereset="30";
+      var clock = 0;
+
+      if (timereset == "")
+        timereset="5";
+
+      function auto_refresh()
+      {
+        if( timereset != "0")
+        {
+          if(clock >= timereset)
+          {
+            location.href = "RST_statistic.htm";
+            document.getElementById("set_interval").disabled = true;
+          }
+          else
+            setTimeout("clock = clock + 0.5; auto_refresh();", 500);
+        }
+      }
+      auto_refresh();
+      var business_ap_detect=0;
+      var logs_checkbox_flag=1;
+      var host_name="Orbi-micro";
+      var usb_router_flag=0;
+      var have_wifi_flag=1;
+      var an_router_flag=1;
+      var ac_router_flag=1;
+      var guest_router_flag=1
+      var byod_network_flag=0
+      var traffic_router_flag=1;
+      var qos_router_flag=1;
+      var have_dynamic_qos=1;
+      var support_qos_trusted_ip=0;
+      var multi_lang_router_flag=1;
+      var wds_router_flag=0;
+      var video_router_flag=1;
+      var transmit_router_flag=1;
+      var txctl_63_33_flag=0;
+      var pppoe_mac_router_flag=1;
+      var ddns_oray_router_flag=1;
+      var ddns_3322_router_flag=1;
+      var ddns_no_ip_flag=1;
+      var ddns_wildcards_flag=1;
+      var dfs_channel_router_flag=0;
+      var dfs_canada_router_flag=0;
+      var dfs_europe_router_flag=0;
+      var dfs_australia_router_flag=0;
+      var dfs_japan_router_flag=0;
+      var russian_ppp_flag=1;
+      var russian_pppoe_flag=0;
+      var l2tp_flag=1;
+      var igmp_flag=1;
+      var bt_igmp_flag=1;
+      var pppoe_intranet_flag=1;
+      var dns_third_flag=1;
+      var tr069_router_flag=0;
+      var block_sites_flag=1;
+      var ipv6_flag=1;
+      var ipv6_dns_manual=1;
+      var ipv6_static_route=0;
+      var bgn_mode1_value=54;
+      var bgn_mode2_value=192;
+      var bgn_mode3_value=400;
+      var an_mode1_value=173;
+      var an_mode2_value=400;
+      var an_mode3_value=866;
+      var have_enterprise=0;
+      var have_mapt=0;
+      var vpn_show_flag=1;
+      var vpn_smartphone_flag=1;
+      var max_bandwidth=1000;
+      var bigpond_flag=0;
+      var rae_flag=1;
+      var apmode_flag=1;
+      var ap_mode_detection_flag=1;
+      var auto_conn_flag=1;
+      var bridge_iptv_flag=0;
+      var parental_ctrl_flag=1;
+      var new_multiple_lang=1;
+      var tivo_flag=1;
+      var readyShare_print=0;
+      var readycloud_flag=0;
+      var have_vault=0;
+      var have_green_download=0;
+      var have_broadband=0;
+      var an_coexist_flag=0;
+      var adv_coexistence_flag=1;
+      var basic_coexistence_flag=0;
+      var have_ipmac_flag=0;
+      var vlan_iptv_flag=1;
+      var vlan_free_flag=1;
+      var wds_support_wpa=0;
+      var forward_range_flag=1;
+      var hdd_multi_user=0;
+      var have_lte_flag=0;
+      var access_control_flag=1;
+      var show_edit_button=1;
+      var mobile_conn_flag=0;
+      var bridge_flag=1;
+      var speedtest_flag=1;
+      var have_speedtest_menu=0;
+      var super_wifi_flag=1;
+      var ipv6_6rd_flag=1;
+      var consolidate_device_name=1;
+      var have_advanced_qos=0;
+      var priority_zone_flag=0;
+      var dsl_enable_flag=0;
+      var support_netgear_ddns=1;
+      var qtn_api_statistics_flag=0;
+      var airtime_fairness_flag=0;
+      var support_ht160_flag=0;
+      var mu_mimo_flag=1;
+      var fragment_an_flag=0;
+      var enable_vlan_pppoe_support=1;
+      var geniecloud_flag=1;
+      var dfs_radar_detect_flag=1;
+      var vlan_sb_flag=0;
+      var lan_ports_num=1;
+      var have_email_flag=1;
+      var port_forwarding_flag=1;
+      var port_triggering_flag=1;
+      var ipv6_auto_detect=1;
+      var ipv6_dhcp_flag=1;
+      var ipv6_pppoe_flag=1;
+      var circle_avaliable_note=0;
+      var circle_support=1;
+      var support_qos=0;
+      var support_arlo=0;
+      var support_orange_vlan=1;
+      var have_fb_wifi=0;var auto_upgrade_set=0;
+      var security_enhance_flag=1;
+      var mobile_lte_flag=0;
+      var support_new_ntgrtype=1;
+      var is_dual_band=0;
+      var have_dhcp_option=1;
+      var dnifwupg=0;
+      var support_singapore_isp_flag=1;
+      var support_malaysia_isp_flag=1;
+      var support_spain_isp_flag=1;
+      var funjsq_flag=1;
+      var data_usage_flag=0;
+      var support_ra_opt_in_opt_out=1;
+
+      function translate_status(stat)
+      {
+        if(stat.indexOf("Full")>0)
+          stat=stat.replace("Full", "Full");
+        else if(stat.indexOf("Half")>0)
+          stat=stat.replace("Half", "Half");
+        return stat;
+
+      }
+    </script>
+</FORM>
+</BODY>
+</HTML>
