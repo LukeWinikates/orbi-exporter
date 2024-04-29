@@ -49,4 +49,5 @@ func TestHTTP(t *testing.T) {
 
 	assert.NotEmpty(t, metrics)
 	assert.Len(t, metrics, len(allowList))
+	assert.Equal(t, "3069182", metrics["sys_uptime"].Value)
 }

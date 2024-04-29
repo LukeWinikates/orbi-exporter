@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-var varMatcher = regexp.MustCompile(`\s?var\s+([a-z0-9_]+)\s?=\s?(.*)`)
+var varMatcher = regexp.MustCompile(`\s?var\s+([a-z0-9_]+)\s?=\s?"(.*)"`)
 var allowList = map[string]bool{
 	"sys_uptime":       true,
 	"lan_status":       true,
@@ -62,15 +62,14 @@ var allowList = map[string]bool{
 	"lan3_systime":     true,
 }
 
-func parse(body io.Reader) ([]Metric, error) {
-	var metrics []Metric
+func parse(body io.Reader) (map[string]Metric, error) {
+	metrics := make(map[string]Metric)
 	scanner := bufio.NewScanner(body)
 	for scanner.Scan() {
 		if metric, ok := readMetricLine(scanner.Text()); ok {
-			if !isInAllowList(metric) {
-				continue
+			if isInAllowList(metric) {
+				metrics[metric.Name] = *metric
 			}
-			metrics = append(metrics, *metric)
 		}
 
 		if shouldEnd(scanner.Text()) {
@@ -88,9 +87,6 @@ func shouldEnd(text string) bool {
 }
 
 func isInAllowList(metric *Metric) bool {
-	//if metric.Name == "sys_uptime" {
-	//	return true
-	//}
 	return allowList[metric.Name]
 }
 
