@@ -77,32 +77,32 @@ type metricTranslation struct {
 
 var metricTranslations = map[string]metricTranslation{
 	"txpkts": {
-		Name:      "transmitted_packets",
+		Name:      "orbi_transmitted_packets_total",
 		Help:      "Packets Transmitted",
 		ValueType: prometheus.CounterValue,
 	},
 	"rxpkts": {
-		Name:      "received_packets",
+		Name:      "orbi_received_packets_total",
 		Help:      "Packets Received",
 		ValueType: prometheus.CounterValue,
 	},
 	"collisions": {
-		Name:      "collisions",
+		Name:      "orbi_collisions_total",
 		Help:      "Collisions",
 		ValueType: prometheus.CounterValue,
 	},
 	"txbs": {
-		Name:      "transmitted_bytes_per_second",
+		Name:      "orbi_transmitted_bytes_per_second",
 		Help:      "Transmitted Bytes per second",
 		ValueType: prometheus.GaugeValue,
 	},
 	"rxbs": {
-		Name:      "received_bytes_per_second",
+		Name:      "orbi_received_bytes_per_second",
 		Help:      "Received Bytes per second",
 		ValueType: prometheus.GaugeValue,
 	},
 	"systime": {
-		Name:      "uptime_seconds",
+		Name:      "orbi_uptime_seconds_total",
 		Help:      "Component uptime in seconds",
 		ValueType: prometheus.CounterValue,
 	},
@@ -137,7 +137,7 @@ func translateMetric(metric orbi.Metric, host string) prometheus.Metric {
 	if metric.Name == "sys_uptime" {
 		return prometheus.MustNewConstMetric(
 			prometheus.NewDesc(
-				"system_uptime_seconds",
+				"orbi_system_uptime_seconds_total",
 				"System Uptime in Seconds",
 				[]string{"host"},
 				prometheus.Labels{
