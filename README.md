@@ -2,9 +2,11 @@
 Prometheus Exporter for Orbi Metrics
 
 
-# Origin Story
+## Origin Story
 
-My Orbi Router doesn't expose Prometheus metrics, but it does have a page that provides them.
+My Orbi Router doesn't expose metrics in Prometheus format, but it does expose some network metrics via its control panel.
+The control panel is a web application running on the router protected with HTTP Basic Auth. Although it responds in HTML,
+the embedded javascript variables are easy to parse.
 
 this is built to run via the container service on my synology NAS
 
@@ -25,89 +27,24 @@ ORBI_BASICAUTH_PASSWORD=<your password>
 Tested against an Orbi `RBR20`. Router Firmware Version `V2.7.4.24`
 
 
+## Metrics Provided
 
-## Interpreting
+Beyond parsing the metrics, this exporter also adapts their structure to reflect Prometheus [naming conventions and recommended patterns](https://prometheus.io/docs/practices/naming/) for metrics and labels:
 
-WAN:
+* including the unit in the metric name (sys_uptime -> "system_uptime_seconds")
+* "received_packets" using labels -> "lan_rxpkts" "wan_rxpkts", etc are all "received_packets" and can be aggregated easily
 
-LAN:
+`received_bytes_per_second`
+`transmitted_bytes_per_second`
+`received_packets`
+`transmitted_packets`
+`collisions`
+`uptime_seconds`
+`system_uptime_seconds`
 
-WLAN b/g/n: this is the 2.6ghz wifi network?
-WLAN a/n/ac: this is the 5.0ghz wifi network
-WLAN Backhaul
+## Labels
 
-
-## the JS Vars
-
-var sys_uptime="3069182";
-
-System updtime in seconds; 3069182 / 60 / 60 / 24 -> ~35.5 days
-
-
-
-var lan_status="Link up";
-
-
-# packets transmitted over lan
-var lan_txpkts="88670935";
-
-# packets received over lan
-var lan_rxpkts="43826450";
-var lan_collisions="0";
-
-# transmitted B/s
-var lan_txbs="1345";
-
-# received B/s
-var lan_rxbs="729";
-
-# uptime
-var lan_systime="3069182";
-
-
-
-var wan_status="1000M/Full";
-var wan_txpkts="121869567";
-var wan_rxpkts="262693070";
-var wan_collisions="0";
-var wan_txbs="1399";
-var wan_rxbs="1399";
-var wan_systime="2695";
-
-
-var bgn_status="400M";
-var bgn_txpkts="31060602";
-var bgn_rxpkts="60138";
-var bgn_collisions="0";
-var bgn_txbs="32";
-var bgn_rxbs="6";
-var bgn_systime="3069110";
-var an_status="866M";
-var an_txpkts="17510305";
-var an_rxpkts="0";
-var an_collisions="0";
-var an_txbs="0";
-var an_rxbs="0";
-var an_systime="3069093";
-var bh_status="866M";
-var bh_txpkts="32365100";
-var bh_rxpkts="4094";
-var bh_collisions="0";
-var bh_txbs="0";
-var bh_rxbs="0";
-var bh_systime="3069093";
-var wwan0_status="no service";
-var wwan0_txpkts="0";
-var wwan0_rxpkts="0";
-var wwan0_collisions="0";
-var wwan0_txbs="0";
-var wwan0_rxbs="0";
-var wwan0_systime="0";
-var lan_status0="1000M/Full"
-var lan0_systime = "3069133"
-var lan_status1="Link down"
-var lan1_systime = "0"
-var lan_status2="Link down"
-var lan2_systime = "0"
-var lan_status3="Link down"
-var lan3_systime = "0"
+* `component`: the network within the router for which the metric applies
+* values: "LAN", "WAN", "backhaul", "wifi-2.4Ghz", "wifi-5Ghz"
+* `original_metric_name`: the name of the JavaScript variable used for this metric
+* `host`: the ip address of the router (the same value as `ORBI_HOST`)

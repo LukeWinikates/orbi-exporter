@@ -6,7 +6,8 @@ import (
 )
 
 type Client interface {
-	GetMetrics() (map[string]Metric, error)
+	GetMetrics() (map[string]*Metric, error)
+	Host() string
 }
 
 type Metric struct {
@@ -20,7 +21,7 @@ type realClient struct {
 	password string
 }
 
-func (r realClient) GetMetrics() (map[string]Metric, error) {
+func (r realClient) GetMetrics() (map[string]*Metric, error) {
 	req, err := http.NewRequest("GET", r.url+"/RST_statistic.htm", nil)
 	if err != nil {
 		return nil, err
@@ -39,6 +40,10 @@ func (r realClient) GetMetrics() (map[string]Metric, error) {
 	}
 
 	return parse(resp.Body)
+}
+
+func (r realClient) Host() string {
+	return r.url
 }
 
 func NewClient(url, username, password string) (Client, error) {

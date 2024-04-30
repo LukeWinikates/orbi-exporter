@@ -62,13 +62,13 @@ var allowList = map[string]bool{
 	"lan3_systime":     true,
 }
 
-func parse(body io.Reader) (map[string]Metric, error) {
-	metrics := make(map[string]Metric)
+func parse(body io.Reader) (map[string]*Metric, error) {
+	metrics := make(map[string]*Metric)
 	scanner := bufio.NewScanner(body)
 	for scanner.Scan() {
 		if metric, ok := readMetricLine(scanner.Text()); ok {
 			if isInAllowList(metric) {
-				metrics[metric.Name] = *metric
+				metrics[metric.Name] = metric
 			}
 		}
 

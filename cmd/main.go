@@ -4,7 +4,6 @@ import (
 	"github.com/LukeWinikates/orbi-exporter/collector"
 	"github.com/LukeWinikates/orbi-exporter/orbi"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promauto"
 	"log"
 	"net/http"
 	"os"
@@ -17,17 +16,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	promauto.NewCounterFunc(prometheus.CounterOpts{
-		Name: "system_uptime_seconds",
-	}, func() float64 {
-		metrics, err := orbiClient.GetMetrics()
+	reg := prometheus.NewRegistry()
+	err = reg.Register(collector.NewCollector(orbiClient))
+	if err != nil {
+		log.Fatal(err)
+	}
 
-		if err != nil {
-			return 0
-		}
-		return collector.Translate(metrics).SystemUptimeSeconds
-	})
-	http.Handle("/metrics", promhttp.Handler())
+	http.Handle("/metrics", promhttp.HandlerFor(reg, promhttp.HandlerOpts{Registry: reg}))
 
 	log.Fatal(http.ListenAndServe("localhost:6724", nil))
 }
