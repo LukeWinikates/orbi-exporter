@@ -6,12 +6,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
@@ -30,10 +28,22 @@ jobs:
 
       - name: Build
         run: make
-
-      - name: Archive binary
+      - name: upload binary
         uses: actions/upload-artifact@v4
         with:
           name: orbi-exporter-linux-amd64
           path: |
             build/orbi-exporter-linux-amd64
+
+      - name: Build container image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          outputs: type=tar,dest=build/orbi-exporter-linux-amd64-${{github.sha}}.tar.gz
+          push: false
+      - name: Upload container image
+        uses: actions/upload-artifact@v4
+        with:
+          name: orbi-exporter-linux-amd64-${{github.sha}}.tar.gz
+          path: |
+            build/orbi-exporter-linux-amd64-${{github.sha}}.tar.gz
