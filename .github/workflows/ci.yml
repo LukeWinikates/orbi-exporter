@@ -49,7 +49,7 @@ jobs:
             build/orbi-exporter-linux-amd64-${{github.sha}}.tar.gz
   container-image:
     needs: build
-    if: ${{ github.ref_name == 'container-image-build' && github.repository == 'LukeWinikates/orbi-exporter' }}
+    if: ${{ github.ref_name == '8/merge' && github.repository == 'LukeWinikates/orbi-exporter' }}
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
