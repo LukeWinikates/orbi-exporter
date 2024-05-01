@@ -1,9 +1,9 @@
 package collector
 
 import (
-	"fmt"
 	"github.com/LukeWinikates/orbi-exporter/orbi"
 	"github.com/prometheus/client_golang/prometheus"
+	"log"
 	"strconv"
 	"strings"
 )
@@ -36,7 +36,7 @@ func toNumber(s string) float64 {
 
 	float, err := strconv.ParseFloat(s, 64)
 	if err != nil {
-		fmt.Printf("unexpected number format: %s\n", s)
+		log.Printf("unexpected number format: %s\n", s)
 	}
 	return float
 }
