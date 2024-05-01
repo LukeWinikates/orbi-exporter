@@ -12,6 +12,8 @@ import (
 )
 
 func main() {
+	log.Println("Starting up")
+	log.Printf("Using host: %s\n", os.Getenv("ORBI_HOST"))
 	orbiClient, err := orbi.NewClient(os.Getenv("ORBI_HOST"), os.Getenv("ORBI_BASICAUTH_USER"), os.Getenv("ORBI_BASICAUTH_PASSWORD"))
 	if err != nil {
 		log.Fatal(err)
@@ -24,5 +26,5 @@ func main() {
 
 	http.Handle("/metrics", promhttp.HandlerFor(reg, promhttp.HandlerOpts{Registry: reg}))
 
-	log.Fatal(http.ListenAndServe("localhost:6724", nil))
+	log.Fatal(http.ListenAndServe(":6724", nil))
 }
