@@ -38,7 +38,7 @@ Beyond parsing the metrics, this exporter also adapts their structure to reflect
 
 * metric names are prefixed with `orbi_`
 * metric names contain the unit - for example, `sys_uptime` becomes `orbi_system_uptime_seconds_total`
-* use a single metric name with different labels for metrics that track the same measurement but in different contexts, like "received packets". For example, `lan_rxpkts` and `wan_rxpkts` become `orbi_received_packets` with labels `component: "wan"` and `component: "lan"`
+* use a single metric name with different labels for metrics that track the same measurement but in different contexts, like "received packets". For example, `lan_rxpkts` and `wan_rxpkts` become `orbi_received_packets_total` with labels `component: "wan"` and `component: "lan"`
 
 | Metric Name                         |
 |-------------------------------------|
@@ -54,7 +54,7 @@ Beyond parsing the metrics, this exporter also adapts their structure to reflect
 
 * `original_metric_name`: the name of the source JavaScript variable for this metric from the `RST_statistic.htm` page
 * `host`: the ip address of the router (the same value as `ORBI_HOST`)
-* `component`: the network within the router for which the metric applies (values: "LAN", "WAN", "backhaul", "wifi-2.4Ghz", "wifi-5Ghz")
+* `component`: the network within the router to which the metric applies (values: "LAN", "WAN", "backhaul", "wifi-2.4Ghz", "wifi-5Ghz")
 
 ### Components
 
