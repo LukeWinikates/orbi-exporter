@@ -19,7 +19,11 @@ func main() {
 		log.Fatal(err)
 	}
 	reg := prometheus.NewRegistry()
-	err = reg.Register(collector.NewCollector(orbiClient))
+	err = reg.Register(collector.NewStatisticsCollector(orbiClient))
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = reg.Register(collector.NewDevicesCollector(orbiClient))
 	if err != nil {
 		log.Fatal(err)
 	}

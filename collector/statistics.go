@@ -27,11 +27,10 @@ func (o *orbiCollector) Collect(metrics chan<- prometheus.Metric) {
 			metrics <- translateMetric(*metric, o.orbiClient.Host())
 		}
 	}
-
 	log.Println("finished collecting metrics")
 }
 
-func NewCollector(client orbi.Client) prometheus.Collector {
+func NewStatisticsCollector(client orbi.Client) prometheus.Collector {
 	return &orbiCollector{
 		orbiClient: client,
 	}

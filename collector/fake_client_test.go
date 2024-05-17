@@ -1,12 +1,6 @@
 package collector
 
-import (
-	"github.com/LukeWinikates/orbi-exporter/orbi"
-	"github.com/prometheus/client_golang/prometheus/testutil"
-	"github.com/stretchr/testify/assert"
-	"strings"
-	"testing"
-)
+import "github.com/LukeWinikates/orbi-exporter/orbi"
 
 var cannedResponse = map[string]*orbi.Metric{
 	"sys_uptime": {
@@ -267,29 +261,35 @@ orbi_uptime_seconds_total{component="wifi-5GHz",host="http://fakehost.local",ori
 type fakeClient struct {
 }
 
+func (f fakeClient) GetDevices() ([]orbi.Device, error) {
+	return []orbi.Device{
+		{
+			IP:                "10.0.0.10",
+			MAC:               "AA:BB:CC:00:11:22",
+			ConnectionType:    "5G",
+			AttachType:        "0",
+			DeviceType:        "2",
+			DeviceTypeName:    "Laptop",
+			Model:             "Generic",
+			Name:              "My Laptop",
+			ActiveStatus:      "0",
+			ConnectedOrbiName: "Orbi Router",
+			ConnectedOrbiMAC:  "FF:FF:FF:FF:FF:FF",
+			BackhaulStatus:    "Good",
+			LedState:          "0",
+			LedFunc:           "0",
+			SyncBtn:           "0",
+			Uprate:            "0.00",
+			Downrate:          "0.00",
+			ModuleName:        "",
+		},
+	}, nil
+}
+
 func (f fakeClient) GetMetrics() (map[string]*orbi.Metric, error) {
 	return cannedResponse, nil
 }
 
 func (f fakeClient) Host() string {
 	return "http://fakehost.local"
-}
-
-func TestCollector(t *testing.T) {
-	client := &fakeClient{}
-	c := NewCollector(client)
-	problems, err := testutil.CollectAndLint(c,
-		`orbi_received_bytes_per_second`,
-		`orbi_transmitted_bytes_per_second`,
-		`orbi_received_packets`,
-		`orbi_transmitted_packets`,
-		`orbi_collisions`,
-		`orbi_uptime_seconds`,
-		`orbi_system_uptime_seconds`,
-	)
-
-	assert.NoError(t, err)
-	assert.Empty(t, problems)
-
-	assert.NoError(t, testutil.CollectAndCompare(c, strings.NewReader(expectedResponse)))
 }

@@ -62,7 +62,7 @@ var allowList = map[string]bool{
 	"lan3_systime":     true,
 }
 
-func parse(body io.Reader) (map[string]*Metric, error) {
+func parseMetrics(body io.Reader) (map[string]*Metric, error) {
 	metrics := make(map[string]*Metric)
 	scanner := bufio.NewScanner(body)
 	for scanner.Scan() {
