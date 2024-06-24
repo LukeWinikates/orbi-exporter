@@ -36,7 +36,7 @@ jobs:
             build/orbi-exporter-linux-amd64
 
       - name: Build container image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           outputs: type=tar,dest=build/orbi-exporter-linux-amd64-${{github.sha}}.tar.gz
@@ -64,7 +64,7 @@ jobs:
           name: orbi-exporter-linux-amd64
           path: build/orbi-exporter-linux-amd64
       - name: build and push container image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
