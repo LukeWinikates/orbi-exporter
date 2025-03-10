@@ -3,7 +3,7 @@ module github.com/LukeWinikates/orbi-exporter
 go 1.22.2
 
 require (
-	github.com/prometheus/client_golang v1.21.0
+	github.com/prometheus/client_golang v1.21.1
 	github.com/stretchr/testify v1.10.0
 )
 
