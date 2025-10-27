@@ -59,7 +59,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - uses: actions/checkout@v5
       - name: download binary
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: orbi-exporter-linux-amd64
           path: build/orbi-exporter-linux-amd64
